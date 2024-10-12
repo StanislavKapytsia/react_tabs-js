@@ -12,35 +12,29 @@ export const tabs = [
   { id: 'tab-3', title: 'Tab 3', content: 'Some text 3' },
 ];
 
-function getContent(data, title) {
-  const currentTab = data.filter(item => item.title === title);
-
-  return currentTab[0].content;
-}
-
 export const App = () => {
-  const [selectLink, setSelectLink] = useState('Tab 1');
+  const [selectItem, setSelectItem] = useState(tabs[0]);
 
   return (
     <div className="section">
-      <h1 className="title">{`Selected tab is ${selectLink}`}</h1>
+      <h1 className="title">{`Selected tab is ${selectItem.title}`}</h1>
 
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
             {tabs.map(tab => (
               <Tabs
-                tab={tab}
                 key={tab.id}
-                select={selectLink}
-                set={setSelectLink}
+                tab={tab}
+                select={selectItem}
+                set={setSelectItem}
               />
             ))}
           </ul>
         </div>
-        {selectLink && (
+        {selectItem && (
           <div className="block" data-cy="TabContent">
-            {getContent(tabs, selectLink)}
+            {selectItem.content}
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 export const Tabs = ({ tab, select, set }) => {
-  const check = tab.title === select;
+  const check = tab.id === select.id;
   let condition = '';
 
   if (check) {
@@ -7,12 +7,8 @@ export const Tabs = ({ tab, select, set }) => {
   }
 
   return (
-    <li data-cy="Tab" className={condition && 'is-active'}>
-      <a
-        href={`#${tab.id}`}
-        data-cy="TabLink"
-        onClick={e => set(e.target.textContent)}
-      >
+    <li key={tab.id} data-cy="Tab" className={condition && 'is-active'}>
+      <a href={`#${tab.id}`} data-cy="TabLink" onClick={() => set(tab)}>
         {tab.title}
       </a>
     </li>
