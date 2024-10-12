@@ -13,11 +13,12 @@ export const tabs = [
 ];
 
 export const App = () => {
-  const [selectItem, setSelectItem] = useState(tabs[0]);
+  const [selectItem, setSelectItem] = useState(tabs[0].id);
+  const currentItem = tabs.filter(tab => tab.id === selectItem);
 
   return (
     <div className="section">
-      <h1 className="title">{`Selected tab is ${selectItem.title}`}</h1>
+      <h1 className="title">{`Selected tab is ${currentItem[0].title}`}</h1>
 
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
@@ -28,13 +29,14 @@ export const App = () => {
                 tab={tab}
                 select={selectItem}
                 set={setSelectItem}
+                currentItem={currentItem}
               />
             ))}
           </ul>
         </div>
         {selectItem && (
           <div className="block" data-cy="TabContent">
-            {selectItem.content}
+            {currentItem[0].content}
           </div>
         )}
       </div>
